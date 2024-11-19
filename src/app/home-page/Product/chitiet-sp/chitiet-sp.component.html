@@ -1,0 +1,67 @@
+<!-- <div class="product-list">
+  <div class="product-item">
+    <div class="product-image">
+      <img [src]="product.PathAnh" >
+    </div>
+    <div class="product-details">
+      <h3>{{ product.product_name }}</h3>
+      <p><strong>Giá:</strong> {{ product.price }}</p>
+      <p class="p2"><strong>Giá:</strong> {{ product.image_url }}</p>
+    </div>
+  </div>
+</div> -->
+<div class="product-detail-container">
+  <div class="product-image-container">
+    <img [src]="product.PathAnh" alt="{{ product.product_name }}" class="product-image">
+  </div>
+  <div class="product-info">
+    <h1 class="product-title">{{ product.product_name }}</h1>
+    <p class="product-price">{{ product.price }}</p>
+    
+    <!-- Thông tin mô tả chi tiết -->
+    <div class="product-description">
+      <h3>Mô tả sản phẩm</h3>
+      <p>Sản phẩm này là một chiếc điện thoại thông minh với màn hình 6.5 inch, camera 48MP và bộ vi xử lý mạnh mẽ. Với thiết kế tinh tế và hiệu năng ổn định, chiếc điện thoại này sẽ là người bạn đồng hành lý tưởng cho bạn trong công việc và giải trí.</p>
+    </div>
+
+    <!-- Thông số kỹ thuật -->
+    <div class="product-specs">
+      <h3>Thông số kỹ thuật</h3>
+      <ul>
+        <li><strong>SKU:</strong> 123456789</li>
+        <li><strong>Trọng lượng:</strong> 0.4 kg</li>
+        <li><strong>Màu sắc:</strong> Đen, Xanh dương, Trắng</li>
+        <li><strong>Kích thước màn hình:</strong> 6.5 inch</li>
+        <li><strong>Camera:</strong> 48MP</li>
+        <li><strong>Vi xử lý:</strong> Snapdragon 888</li>
+      </ul>
+    </div>
+
+    <!-- Đánh giá sản phẩm -->
+    <div class="product-reviews">
+      <h3>Đánh giá</h3>
+      <p>5 Đánh giá</p>
+      <div class="rating">
+        <span class="stars">
+          <!-- <i *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{'filled': star <= 4}">★</i> -->
+        </span>
+      </div>
+    </div>
+
+    <!-- Nút mua hàng -->
+    <div class="product-actions">
+      <button class="btn-add-to-cart">Thêm vào giỏ hàng</button>
+      <button class="btn-buy-now">Mua ngay</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noProduct>
+  <div class="no-product">
+    <p>Không có dữ liệu sản phẩm.</p>
+  </div>
+</ng-template>
+
+
+
+

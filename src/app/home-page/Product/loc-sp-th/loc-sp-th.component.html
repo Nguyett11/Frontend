@@ -1,0 +1,22 @@
+<div class="main">
+    <div class="product-list">    
+        <!-- Kiểm tra nếu không có sản phẩm -->
+        <div *ngIf="DsSP.length === 0">Không có sản phẩm nào!</div>
+        
+          <!-- Hiển thị danh sách sản phẩm -->
+        <div class="product-item" *ngFor="let product of DsSP">
+          <div class="product-image">
+            <a [routerLink]="['/home/productDetails', product.product_id]">
+              <img [src]="product.PathAnh">
+            </a>
+          </div>
+          <div class="product-details">
+            <p class="p1">{{ product.product_name }}</p>
+            <p class="p2">{{ product.price }}</p>
+          </div>
+          <div class="btn">
+            <button type="submit" name="btndatHang">Mua ngay</button>
+          </div>
+        </div>
+      </div>
+</div>
