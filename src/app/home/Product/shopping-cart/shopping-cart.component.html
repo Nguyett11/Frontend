@@ -1,0 +1,67 @@
+<div class="shopping-cart">
+<div class="title">
+  <div>
+    <h1>Giỏ hàng của bạn</h1>
+  </div>
+<div>
+  <button><a [routerLink]="['/home/user/viewOH/',this.user_id ]" [routerLinkActive]="'active-link'">Xem lịch sử mua hàng</a></button>
+</div>
+</div>
+  <!-- Danh sách sản phẩm -->
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Hình ảnh</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Thành tiền</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems; index as i">
+          <td>{{ item.product.product_name }}</td>
+          <td>
+            <img 
+              [src]="this.PathAnh" 
+              alt="{{ item.product.product_name }}" 
+              class="product-image" 
+            />
+          </td>
+          <td>{{ item.product.price | currency: 'VND' }}</td>
+          <td>
+            <button (click)="decreaseQuantity(i)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="increaseQuantity(i)">+</button>
+          </td>
+          <td>{{ item.product.price * item.quantity | currency: 'VND' }}</td>
+          <td>
+            <button (click)="confirmDelete(i)">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Tổng tiền -->
+    <div class="total-section">
+      <h3>Tổng tiền: {{ totalAmount | currency: 'VND' }}</h3>
+    </div>
+
+    <!-- Mã giảm giá -->
+    <div class="coupon-section">
+      <input 
+        type="text" 
+        [(ngModel)]="couponCode" 
+        placeholder="Nhập mã giảm giá" 
+      />
+      <button (click)="applyCoupon()">Áp dụng</button>
+    </div>
+  </div>
+
+  <!-- Giỏ hàng trống -->
+  <ng-template #emptyCart>
+    <p>Giỏ hàng của bạn hiện đang trống.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,59 @@
+<div class="main-container">
+
+    <div class="container">
+    <div class="locMenu">
+      <i class="fa fa-filter"></i>
+      <select name="locMenu" id="locMenu" (change)="onFilterChange($event)">
+        <option value="">Lọc</option>
+        <option value="low">Dưới 1 triệu</option>
+        <option value="medium">Từ 1 triệu đến 5 triệu</option>
+        <option value="high">Từ 5 triệu đến 10 triệu</option>
+        <option value="premium">Lớn hơn 10 triệu</option>
+      </select>
+    </div>
+  
+      
+      <div>
+        <nav class="menu-bar">
+          <div class="container" >
+              <ul >
+                  <li *ngFor="let loai of DsTH" style="margin-right: 20px;">
+                     <a [routerLink]="['brand/', loai.brand_id]"> 
+                          {{ loai.brand_name }}
+                      </a>
+                      
+                  </li>
+              </ul>
+          </div>
+      </nav>
+    </div>
+  </div>
+  
+    
+  <div *ngIf="noProductsMessage" class="no-products-message" style="margin-left: 50px; margin-top: 40px; font-size: larger; color: red;">
+    {{ noProductsMessage }}
+  </div>   
+    
+    <div class="product-list">    
+        <!-- Kiểm tra nếu không có sản phẩm -->
+        <div *ngIf="DsSP.length === 0">Không có sản phẩm nào!</div>
+        
+          <!-- Hiển thị danh sách sản phẩm -->
+        <div class="product-item" *ngFor="let product of DsSP">
+          <div class="product-image">
+            <a [routerLink]="['/home/productDetails', product.product_id]">
+              <img [src]="product.PathAnh">
+            </a>
+          </div>
+          <div class="product-details">
+            <p class="p1">{{ product.product_name }}</p>
+            <p class="p2">{{ product.price }}</p>
+          </div>
+          <div class="btn">
+            <button type="submit" name="btndatHang">Mua ngay</button>
+          </div>
+        </div>
+      </div>
+  
+  </div>
+    

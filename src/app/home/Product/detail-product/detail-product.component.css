@@ -1,0 +1,260 @@
+/* Container chính */
+.product-detail-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 40px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Phần hình ảnh */
+  .product-image-container {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Phần thông tin sản phẩm */
+  .product-info {
+    flex: 2;
+    max-width: 600px;
+  }
+  
+  /* Tiêu đề sản phẩm */
+  .product-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Giá sản phẩm */
+  .product-price {
+    font-size: 1.5rem;
+    color: #e74c3c;
+    margin-bottom: 15px;
+  }
+  
+  /* Mô tả sản phẩm */
+  .product-description {
+    margin-bottom: 30px;
+  }
+  
+  .product-description h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .product-description p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+  }
+  
+  /* Thông số kỹ thuật */
+  .product-specs {
+    margin-bottom: 30px;
+  }
+  
+  .product-specs h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .product-specs ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .product-specs li {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  
+  /* Đánh giá sản phẩm */
+  .product-reviews {
+    margin-bottom: 30px;
+  }
+  
+  .product-reviews h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .rating .stars {
+    color: #f1c40f;
+  }
+  
+  .rating i {
+    font-size: 1.5rem;
+  }
+  
+  .rating i.filled {
+    color: #f39c12;
+  }
+  
+  /* Nút hành động */
+  .product-actions {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .btn-add-to-cart, .btn-buy-now {
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #27ae60;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-add-to-cart:hover, .btn-buy-now:hover {
+    background-color: #2ecc71;
+  }
+  
+  .btn-buy-now {
+    background-color: #e74c3c;
+  }
+  
+  .btn-buy-now:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Phần không có sản phẩm */
+  .no-product {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #e74c3c;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+
+  /* Styling for the modal body */
+.modal-body {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+/* Styling for form groups */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Styling for labels */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* Styling for inputs */
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus effect on inputs */
+input:focus, select:focus {
+  border-color: #007BFF;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Styling for placeholder text */
+input::placeholder {
+  color: #aaa;
+}
+
+/* Styling for small text (helper text) */
+small {
+  display: block;
+  margin-top: 5px;
+  color: #888;
+  font-size: 12px;
+}
+
+/* Styling for select dropdown */
+select {
+  appearance: none;
+  background-color: #fff;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%204%205%27%3E%3Cpath%20fill%3D%27%23333%27%20d%3D%27M2%200L0%202h4z%27/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px 12px;
+  padding-right: 30px;
+}
+
+/* Add hover and focus effect for select dropdown */
+select:hover, select:focus {
+  cursor: pointer;
+  border-color: #007BFF;
+}
+
+/* Add custom style for modal header or footer (optional) */
+.modal-header, .modal-footer {
+  padding: 15px;
+  background-color: #f7f7f7;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Optional: Add some spacing inside the modal */
+.modal {
+  padding: 20px;
+}
+
+
+/* Rating dropdown styling */
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rating label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+.rating select {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.review-form button{
+width: 100px;
+border-radius: 8px;
+}

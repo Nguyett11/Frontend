@@ -1,0 +1,43 @@
+<!-- <div class="container">
+    <div *ngFor="let product of products">
+        <div class="photo">
+          <a>
+            <img [src]="product.PathAnh" >
+          </a>
+        </div>
+        <div class="main">
+          <div class="content1">
+            <h5>{{product.product_name}}</h5>
+          </div>
+          <div class="content2">
+            <h4><i class="fa-regular fa-heart"></i> {{product.price}}.VNĐ</h4>
+          </div>
+        </div>
+      </div>
+</div> -->
+
+<div class="outer-container">
+  <div class="product-list">    
+    <!-- Kiểm tra nếu không có sản phẩm -->
+    <div *ngIf="products.length === 0">Không có sản phẩm nào!</div>
+    
+      <!-- Hiển thị danh sách sản phẩm -->
+    <div class="product-item" *ngFor="let product of products" style="background-color: white;">
+      <div class="product-image">
+        <a [routerLink]="['/home/product/detail', product.product_id]" [routerLinkActive]="'active-link'">
+          <img [src]="product.PathAnh" />
+        </a>
+        
+      </div>
+      <div class="product-details">
+        <p class="p1">{{ product.product_name }}</p>
+        <p class="p2">{{ product.price }}</p>
+      </div>
+
+      <button type="button">
+        <a [routerLink]="['product/shopping-cart/']">Mua ngay</a>
+      </button>
+
+    </div>
+  </div>
+</div>

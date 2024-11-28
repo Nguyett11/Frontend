@@ -1,0 +1,134 @@
+<div class="product-detail-container">
+  <div class="product-image-container">
+    <img [src]="product.PathAnh" alt="{{ product.product_name }}" class="product-image">
+  </div>
+  <div class="product-info">
+    <h1 class="product-title">{{ product.product_name }}</h1>
+    <p class="product-price">{{ product.price }}</p>
+    
+    <!-- Thông tin mô tả chi tiết -->
+    <div class="product-description">
+      <h3>Mô tả sản phẩm</h3>
+      <p>Sản phẩm này là một chiếc điện thoại thông minh với màn hình 6.5 inch, camera 48MP và bộ vi xử lý mạnh mẽ. Với thiết kế tinh tế và hiệu năng ổn định, chiếc điện thoại này sẽ là người bạn đồng hành lý tưởng cho bạn trong công việc và giải trí.</p>
+    </div>
+
+    <!-- Thông số kỹ thuật -->
+    <div class="product-specs">
+      <h3>Thông số kỹ thuật</h3>
+      <ul>
+        <li><strong>SKU:</strong> 123456789</li>
+        <li><strong>Trọng lượng:</strong> 0.4 kg</li>
+        <li><strong>Màu sắc:</strong> Đen, Xanh dương, Trắng</li>
+        <li><strong>Kích thước màn hình:</strong> 6.5 inch</li>
+        <li><strong>Camera:</strong> 48MP</li>
+        <li><strong>Vi xử lý:</strong> Snapdragon 888</li>
+      </ul>
+    </div>
+
+    <!-- Nút mua hàng -->
+    <div class="product-actions">
+      <button class="btn-add-to-cart" (click)="addToCart()">Thêm vào giỏ hàng</button>
+      <div class="create-button">
+        <button type="button" class="btn-buy-now" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="themDon()">Mua ngay</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="margin-left: 20px;">Thanh toán đơn hàng</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-bottom: 20px;" (click)="dong()"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="address">Địa chỉ giao hàng</label>
+                  <input type="text" id="address" name="address" placeholder="Nhập địa chỉ giao hàng" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Số điện thoại</label>
+                  <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" pattern="[0-9]{10}" required>
+                  <small>Format: 10 digits (e.g., 0123456789)</small>
+                </div>
+                <div class="form-group">
+                  <label for="payment">Phương thức thanh toán</label>
+                  <select id="payment" name="payment" required>
+                    <option value="">Chọn một phương thức thanh toán</option>
+                    <option value="credit_card">Thanh toán bằng thẻ tín dụng</option>
+                    <option value="bank_transfer">Chuyển khoản</option>
+                    <option value="cash_on_delivery">Thanh toán khi nhận hàng</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary" (click)="muaNgay()">Đặt ngay</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noProduct>
+  <div class="no-product">
+    <p>Không có dữ liệu sản phẩm.</p>
+  </div>
+</ng-template>
+
+<div class="form" style="border: 1px solid #a79c9c ; width:1000px;
+margin-bottom: 20px; margin-top: 20px; margin-left: 10px;">
+  <div style="padding: 20px;">
+    <h4>Đánh giá sản phẩm của bạn</h4>
+  </div>
+<div style="padding: 50px; margin-top:  -50px;">
+  <div class="review-form" >
+    <textarea style="width: 500px;" [(ngModel)]="newReview" placeholder="Hãy để lại bình luận của bạn tại đây!"></textarea>
+    <div class="rating">
+      <label>Rating:</label>
+      <select [(ngModel)]="rating">
+        <option *ngFor="let star of [1, 2, 3, 4, 5]" [value]="star">{{ star }} ★</option>
+      </select>
+    </div>
+    <button style="padding: 8px 8px; background-color: blue; color: white; " (click)="submitReview()">Gửi</button>
+  </div>
+  <div style="border: 1px solid #a79c9c; margin-top: 10px; padding: 10px 10px; " class="review-item" *ngFor="let r of reviews">
+    <p><strong>{{customer_name}}</strong></p>
+    <p>Rating: {{ r.rating }} ★</p>
+    <p>{{ r.content }}</p>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addModal" (click)="editReview(r)">
+      <i class="fas fa-pen"></i>
+    </button>
+    <button style="margin-left: 20px;" type="button" class="btn btn-warning" (click)="deleteReview(r.id)">
+      <i class="fas fa-trash"></i>
+    </button>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Edit Review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form *ngIf="selectedReview" (ngSubmit)="suaReview()">
+          <div class="mb-3">
+            <label for="Content" class="form-label">Content</label>
+            <input type="text" class="form-control" id="Content" [(ngModel)]="contenReview" name="Content" required>
+          </div>
+          <div class="mb-3">
+            <label for="Rating" class="form-label">Rating</label>
+            <select class="form-control" id="Rating" [(ngModel)]="ratingReview" name="Rating" rows="3" required>
+              <option *ngFor="let star of [1, 2, 3, 4, 5]" [value]="star">{{ star }} ★</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Update Review</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

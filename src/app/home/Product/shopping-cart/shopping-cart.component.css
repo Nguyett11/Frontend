@@ -1,0 +1,168 @@
+/* Tổng thể giao diện giỏ hàng */
+.shopping-cart {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .shopping-cart h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  /* Bảng giỏ hàng */
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  .cart-table th,
+  .cart-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+  
+  .cart-table img.product-image {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .cart-table button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .cart-table button:hover {
+    background-color: #0056b3;
+  }
+  
+  .cart-table button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Tổng tiền */
+  .total-section {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  /* Mã giảm giá */
+  .coupon-section {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .coupon-section input {
+    padding: 12px;
+    font-size: 16px;
+    width: 70%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .coupon-section button {
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .coupon-section button:hover {
+    background-color: #218838;
+  }
+  
+  /* Giỏ hàng trống */
+  .ng-template p {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+  }
+  
+  /* Liên kết xem lịch sử đơn hàng */
+  .view-all-orders {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .view-all-orders a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    background-color: #f0f8ff;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .view-all-orders a:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cart-table th,
+    .cart-table td {
+      font-size: 14px;
+      padding: 12px;
+    }
+  
+    .coupon-section input,
+    .coupon-section button {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    .total-section {
+      font-size: 18px;
+    }
+  }
+  .title{
+    display: flex; 
+    align-items: center; 
+    gap: 500px; 
+  }
+  .title button{
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding: 8px 8px;
+    background-color: #64dbeb;
+    border: none;
+  }
+  .title button a{
+    text-decoration: none;
+    color: white;
+  }
