@@ -22,6 +22,12 @@ export class userService {
   private currentUser: User | null = null;
   constructor(private http: HttpClient) {}
 
+  getUsers(): Observable<any> {
+    const apiUrlWithRole = `${this.apiUrl}`; 
+    return this.http.get<any>(apiUrlWithRole);
+  }
+  
+
   //Register
   register(body: any){
     const url = `${this.apiUrl}`;

@@ -1,0 +1,62 @@
+
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Cập nhật Hóa đơn</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+<!-- Search Section -->
+<div class="row mb-3">
+  <div class="col-md-6">
+    <input 
+      type="text" 
+      class="form-control" 
+      [(ngModel)]="searchText" 
+      />
+    <button type="button" (click)="timkiem()"><i class="fas fa-chevron-left"></i> Tìm kiếm</button>
+  </div>
+</div>
+
+<!-- Orders Table -->
+<div  class="container mt-3">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Mã đơn hàng</th>
+        <th>Tên khách hàng</th>
+        <th>Trạng thái đơn hàng</th>
+        <th>Ngày đặt hàng</th>
+        <th>Tổng giá trị</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through the filtered list of orders -->
+      <tr *ngFor="let donhang of orderSearch.length > 0 ? orderSearch : DSDonHang">
+        <td>{{ donhang.order_id }}</td>
+        <td>{{ donhang.customer_name }}</td>
+        <td>
+          <select [(ngModel)]="donhang.order_status" >
+            <option>{{donhang.order_status}}</option>
+          </select>
+        </td>
+        <td>{{ donhang.create_at | date:'MM/dd/yyyy'}}</td>
+        <td>{{ donhang.total_amount }}</td>
+        <td class="sua-xoa">
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addModal" (click)="editDonhang(donhang)">
+            <i class="fas fa-pen"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  
