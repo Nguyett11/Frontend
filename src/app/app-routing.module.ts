@@ -15,6 +15,15 @@ import { LoginComponent } from './home/User/login/login.component';
 import { ReviewsComponent } from './home/Product/reviews/reviews.component';
 import { Xacthuc } from './home/User/xacthuc';
 import { RegisterComponent } from './home/User/register/register.component';
+import { AdminComponent } from './admin/admin.component';
+import { ListDonhangComponent } from './admin/Donhang/list-donhang/list-donhang.component';
+import { CreateDonhangComponent } from './admin/Donhang/create-donhang/create-donhang.component';
+import { ListCategoriesComponent } from './admin/Categories/list-categories/list-categories.component';
+import { CreateCategoriesComponent } from './admin/Categories/create-categories/create-categories.component';
+import { ListBrandsComponent } from './admin/Brands/list-brands/list-brands.component';
+import { CreateBrandsComponent } from './admin/Brands/create-brands/create-brands.component';
+import { IndexComponent } from './admin/index/index.component';
+
 
 // const routes: Routes = [
 //   { path: 'home', component: HomeComponent, children: [
@@ -34,7 +43,8 @@ import { RegisterComponent } from './home/User/register/register.component';
 const routes: Routes = [
 
 
-  { path: '', redirectTo: '/home/list', pathMatch: 'full' }, // Route mặc định
+ // { path: '', redirectTo: '/home/list', pathMatch: 'full' }, // Route mặc định
+
   { path: 'home', component: HomeComponent, children: [
     { path: '', redirectTo: 'list', pathMatch: 'full' }, // Route mặc định của home
     { path: 'login', component: LoginComponent },
@@ -63,7 +73,20 @@ const routes: Routes = [
     { path: 'product/carts', component: ShoppingCartComponent }
     
   ]},
-  { path: '**', redirectTo: '/home/list' }, // Route wildcard (404) chuyển về /home/list
+
+  { path: 'admin', component: AdminComponent, canActivate: [Xacthuc], children: [
+  //  { path: '**', redirectTo: 'index' },
+    { path: 'index', component: IndexComponent },
+    { path: 'donhang/list', component: ListDonhangComponent },
+    { path: 'donhang/create', component: CreateDonhangComponent },
+    { path: 'categories/list', component: ListCategoriesComponent },
+    { path: 'categories/create', component: CreateCategoriesComponent },
+    { path: 'brands/list/:id', component: ListBrandsComponent},
+    { path: 'brands/create', component: CreateBrandsComponent},
+  ]},
+
+
+  //{ path: '**', redirectTo: '/home/list' }, // Route wildcard (404) chuyển về /home/list
 ];
 
 

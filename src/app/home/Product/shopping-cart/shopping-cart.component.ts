@@ -25,7 +25,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
      // Lấy danh sách sản phẩm từ giỏ hàng
-    // debugger
+  
     this.cart = this.cartService.getCart();
     const productIds = Array.from(this.cart.keys());
    
@@ -47,7 +47,6 @@ export class ShoppingCartComponent implements OnInit {
             quantity: this.cart.get(productId)!
           };
         });
-        console.log('haha');
       },
       complete: () => {
       

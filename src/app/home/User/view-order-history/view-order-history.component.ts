@@ -17,7 +17,7 @@ import { Product } from '../../../Models/product';
   styleUrl: './view-order-history.component.css'
 })
 export class ViewOrderHistoryComponent {
-//  user: User = new User();
+
   order_id : number;
   order : Order = new Order();
   orderDetail : OrderDetails = new OrderDetails();

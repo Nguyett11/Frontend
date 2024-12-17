@@ -34,5 +34,21 @@ export class BrandService {
       const url = `${this.apiUrl}/Brands/ByCategory/${id}`;
       return this.http.get<any>(url);
     }
+
+    deleteBrand(id:number){
+      const url = `${this.apiUrl}/Brands/${id}`;
+      return this.http.delete<any>(url, this.httpOptions)
+  
+    }
+
+    public updateBrand(id: number,data: any): Observable<any> {
+      const url = `${this.apiUrl}/Brands/${id}`;
+      return this.http.put<any>(url, data, this.httpOptions)
+    }
+
+    public addBrand(data:any){
+      const url = `${this.apiUrl}/Brands`;
+      return this.http.post<any>(url, data)
+    }
     
 }
