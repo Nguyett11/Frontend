@@ -27,6 +27,11 @@ export class FilterByCategoryComponent {
   private routeSub: Subscription;
   priceCategory : string;
 
+  paginatedProducts: Product[] = [];
+  currentPage: number = 1;
+  pageSize: number = 4; // Number of products per page
+  totalPages: number = 0;
+
   ngOnInit() {
     // Lắng nghe các thay đổi từ paramMap để lấy category_id
     this.route.paramMap.subscribe(params => {
@@ -61,6 +66,29 @@ export class FilterByCategoryComponent {
   
   
 
+    // Update pagination based on the filtered products
+    updatePagination(): void {
+      const start = (this.currentPage - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      this.paginatedProducts = this.DsSP.slice(start, end);
+    }
+  
+    // Next page navigation
+    nextPage(): void {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.updatePagination();
+      }
+    }
+  
+    // Previous page navigation
+    previousPage(): void {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.updatePagination();
+      }
+    }
+    
   laySPByDM(id:number){
     this.productService.getByIdDM(id)
       .subscribe({
@@ -72,6 +100,8 @@ export class FilterByCategoryComponent {
         //   this.categoryService.getCategoryDetails(id).subscribe(dm => {
         //     this.product.category_id = dm.category_name;
         // });
+        this.totalPages = Math.ceil(this.DsSP.length / this.pageSize);
+        this.updatePagination();
         },
         error: (err) => {
           console.error('Error:', err);

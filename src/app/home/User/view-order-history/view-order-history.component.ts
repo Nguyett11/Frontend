@@ -17,7 +17,7 @@ import { Product } from '../../../Models/product';
   styleUrl: './view-order-history.component.css'
 })
 export class ViewOrderHistoryComponent {
-//  user: User = new User();
+
   order_id : number;
   order : Order = new Order();
   orderDetail : OrderDetails = new OrderDetails();
@@ -43,59 +43,30 @@ export class ViewOrderHistoryComponent {
   ) {}
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    if (isNaN(id) || id <= 0) {
-      console.error('Invalid ID:', id);
-      alert('Invalid ID. Please check the URL.');
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (!idParam || isNaN(+idParam)) {
+      console.error('Invalid or missing ID:', idParam);
+      alert('Invalid or missing ID. Please check the URL.');
       return;
     }
+  
+    const id = +idParam; // Chuyển đổi sang số sau khi kiểm tra hợp lệ
     console.log(id);
   
-    this.orderService.getOrderByCustomerId(id).subscribe(
+    // Gọi các hàm xử lý logic sau khi xác thực ID
+    this.fetchOrderData(id);
+  }
+
+  private fetchOrderData(customerId: number): void {
+    this.orderService.getOrderByCustomerId(customerId).subscribe(
       (data: Order) => {
         console.log(data); // Kiểm tra dữ liệu trả về
-  
         this.create_at = data.create_at;
         this.order_id = data.order_id;
         this.status = data.order_status;
         this.total_money = data.total_amount;
   
-        
-        console.log('Order ID:', this.order_id);
-  
-        this.userServices.getUserById(data.customer_id).subscribe(
-          (user: User) => {
-            this.user_name = user.username;
-            this.phone = user.phone;
-            this.user_id = user.user_id;
-  
-            // Kiểm tra lại order_id trước khi gọi API chi tiết đơn hàng
-            if (!this.order_id) {
-              console.error('Invalid order_id:', this.order_id);
-              alert('Order ID is missing or invalid.');
-              return;
-            }
-  
-            this.orderDetailService.getOrderDetailById(this.order_id).subscribe(
-              (details: OrderDetails) => {
-                console.log(details);
-                this.orderDetail = details;
-                this.number = details.number_of_products;
-                
-                this.productService.getProductDetails(details.product_id).subscribe(
-                  (product: Product) => {
-                    this.PathAnh = this.productService.PhotosUrl + "/" + product.image_url;
-                    this.product_name = product.product_name;
-                  }
-                );
-              },
-              (error) => {
-                console.error('Error fetching order details:', error);
-                alert('Unable to fetch order details. Please try again later.');
-              }
-            );
-          } // <== Đây là dấu ngoặc kết thúc callback của getUserById()
-        ); // <== Đây là dấu ngoặc đóng của subscribe() trong userServices
+        this.fetchUserAndOrderDetails(data.customer_id);
       },
       (error) => {
         console.error('Error fetching orders:', error);
@@ -103,6 +74,107 @@ export class ViewOrderHistoryComponent {
       }
     );
   }
+  
+  private fetchUserAndOrderDetails(customerId: number): void {
+    this.userServices.getUserById(customerId).subscribe(
+      (user: User) => {
+        this.user_name = user.username;
+        this.phone = user.phone;
+        this.user_id = user.user_id;
+  
+        if (!this.order_id) {
+          console.error('Invalid order_id:', this.order_id);
+          alert('Order ID is missing or invalid.');
+          return;
+        }
+  
+        this.orderDetailService.getOrderDetailById(this.order_id).subscribe(
+          (details: OrderDetails) => {
+            console.log(details);
+            this.orderDetail = details;
+            this.number = details.number_of_products;
+  
+            this.productService.getProductDetails(details.product_id).subscribe(
+              (product: Product) => {
+                this.PathAnh = this.productService.PhotosUrl + '/' + product.image_url;
+                this.product_name = product.product_name;
+              }
+            );
+          },
+          (error) => {
+            console.error('Error fetching order details:', error);
+            alert('Unable to fetch order details. Please try again later.');
+          }
+        );
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+        alert('Unable to fetch user data. Please try again later.');
+      }
+    );
+  }
+  
+  // ngOnInit(): void {
+  //   const id = +this.route.snapshot.paramMap.get('id');
+  //   if (isNaN(id) || id <= 0) {
+  //     console.error('Invalid ID:', id);
+  //     alert('Invalid ID. Please check the URL.');
+  //     return;
+  //   }
+  //   console.log(id);
+  
+  //   this.orderService.getOrderByCustomerId(id).subscribe(
+  //     (data: Order) => {
+  //       console.log(data); // Kiểm tra dữ liệu trả về
+  
+  //       this.create_at = data.create_at;
+  //       this.order_id = data.order_id;
+  //       this.status = data.order_status;
+  //       this.total_money = data.total_amount;
+  
+        
+  //       console.log('Order ID:', this.order_id);
+  
+  //       this.userServices.getUserById(data.customer_id).subscribe(
+  //         (user: User) => {
+  //           this.user_name = user.username;
+  //           this.phone = user.phone;
+  //           this.user_id = user.user_id;
+  
+  //           // Kiểm tra lại order_id trước khi gọi API chi tiết đơn hàng
+  //           if (!this.order_id) {
+  //             console.error('Invalid order_id:', this.order_id);
+  //             alert('Order ID is missing or invalid.');
+  //             return;
+  //           }
+  
+  //           this.orderDetailService.getOrderDetailById(this.order_id).subscribe(
+  //             (details: OrderDetails) => {
+  //               console.log(details);
+  //               this.orderDetail = details;
+  //               this.number = details.number_of_products;
+                
+  //               this.productService.getProductDetails(details.product_id).subscribe(
+  //                 (product: Product) => {
+  //                   this.PathAnh = this.productService.PhotosUrl + "/" + product.image_url;
+  //                   this.product_name = product.product_name;
+  //                 }
+  //               );
+  //             },
+  //             (error) => {
+  //               console.error('Error fetching order details:', error);
+  //               alert('Unable to fetch order details. Please try again later.');
+  //             }
+  //           );
+  //         } // <== Đây là dấu ngoặc kết thúc callback của getUserById()
+  //       ); // <== Đây là dấu ngoặc đóng của subscribe() trong userServices
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching orders:', error);
+  //       alert('Unable to fetch orders data. Please try again later.');
+  //     }
+  //   );
+  // }
   
   logout() {
     this.userServices.logout().subscribe(

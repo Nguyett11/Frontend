@@ -68,7 +68,6 @@ export class DetailProductComponent {
   const currentUser = this.userService.getCurrentUser();  
   if (currentUser) {
     this.user_id = currentUser.user_id;  
-    console.log('uuuu',this.user_id);
     this.customer_name = currentUser.username;
   } else {
     console.log('Không có người dùng đăng nhập');

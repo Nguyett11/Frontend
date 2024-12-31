@@ -6,7 +6,7 @@
           <!-- Hiển thị danh sách sản phẩm -->
         <div class="product-item" *ngFor="let product of DsSP">
           <div class="product-image">
-            <a [routerLink]="['/home/productDetails', product.product_id]">
+            <a [routerLink]="['/home/product/detail/', product.product_id]">
               <img [src]="product.PathAnh">
             </a>
           </div>

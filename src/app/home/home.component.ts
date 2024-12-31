@@ -44,4 +44,12 @@ export class HomeComponent {
      console.log("Vui lòng nhập từ khóa tìm kiếm.");
    }
  }
+
+ goBack() {
+  this.router.navigate([`/home/list`]);   
+}
+
+goBack2() {
+  this.router.navigate([`/admin/index`]); 
+}
 }

@@ -26,12 +26,24 @@ export class CapNhatMKComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = +params['id'];  // Lấy userId từ URL
     });
+    this.loadUserData();
 
     this.oldPassword = '';
     this.newPassword = '';
     this.confirmPassword = '';
 
     //this.updatePassword();
+  }
+
+  loadUserData(): void {
+    const currentUser = this.userservice.getCurrentUser();  
+    if (currentUser) {
+      this.user = currentUser;
+
+    } else {
+      console.log('Không có người dùng đăng nhập');
+      
+    }
   }
 
   isPasswordsMatch(): boolean {
@@ -68,8 +80,24 @@ export class CapNhatMKComponent implements OnInit {
     this.userservice.updatePassword(this.userId, updatePasswordRequest).subscribe(
       (response) => {
         alert('Cập nhật mật khẩu thành công.');
-        // Điều hướng đến trang profile sau khi thành công (nếu cần)
-        // this.router.navigate(['/profile']);
+
+        this.loadUserData();
+
+       // Kiểm tra nếu this.user có giá trị trước khi truy cập role_id
+       if (this.user && this.user.role_id !== undefined) {
+        const roleId = Number(this.user.role_id); // Ensure role_id is a number
+
+        // Differentiate based on user role (role_id)
+        if (roleId === 1) {
+          console.log(roleId);
+          this.router.navigate(['/admin/index']); // Navigate to admin page
+        } else if (roleId === 2) {
+          this.router.navigate(['/home/list']); // Navigate to user page
+        }
+      } else {
+        console.error('User or role_id is undefined');
+        alert('Lỗi: Không tìm thấy thông tin người dùng hoặc vai trò không hợp lệ.');
+      }
       },
       (error) => {
         alert('Error: ' + error.error);
