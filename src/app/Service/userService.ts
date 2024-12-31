@@ -22,6 +22,16 @@ export class userService {
   private currentUser: User | null = null;
   constructor(private http: HttpClient) {}
 
+  getUsers(): Observable<any> {
+    const apiUrlWithRole = `${this.apiUrl}`; 
+    return this.http.get<any>(apiUrlWithRole);
+  }
+  
+  getUsersRole2(): Observable<any[]>{
+    const apiUrl = `${this.apiUrl}`;
+    return this.http.get<any[]>(apiUrl);
+  }
+
   //Register
   register(body: any){
     const url = `${this.apiUrl}`;
@@ -37,8 +47,8 @@ export class userService {
     return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 
-  updateUser(id: number, user: User): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, user);
+  updateUser(id: number, data: any): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${id}`, data);
   }
 
   // getUserByID(id: number): Observable<any>{
@@ -92,17 +102,18 @@ export class userService {
   // }
   
   getUserId(){
-    return localStorage.getItem('userId');
+
+    
+  return localStorage.getItem('userId'); 
   }
 
   setCurrentUser(user: User): void {
     this.currentUser = user;
-    // Lưu thông tin người dùng vào localStorage hoặc sessionStorage để duy trì trong phiên làm việc
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
+  // Get the current user, either from service or localStorage
   getCurrentUser(): User | null {
-    // Kiểm tra trong localStorage xem có người dùng không
     if (this.currentUser) {
       return this.currentUser;
     } else {
@@ -113,5 +124,22 @@ export class userService {
       }
       return null;
     }
+  }
+
+  deleteUser(id:number){
+    const url = `${this.apiUrl}/deleteUser/${id}`;
+    return this.http.delete<any>(url, this.httpOptions)
+
+  }
+
+  // updateUsers(id: number,data: any): Observable<any> {
+  //   const url = `${this.apiUrl}/${id}`;
+  //   return this.http.put<any>(url, data, this.httpOptions)
+  // }
+
+ addUser(data:any){
+    const url = `${this.apiUrl}`;
+    return this.http.post<any>(url, data)
+   
   }
 }

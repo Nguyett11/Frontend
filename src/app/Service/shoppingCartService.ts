@@ -34,16 +34,12 @@ export class shoppingCartService {
   }
 
   addToCart(productId: number, quantity: number = 1): void {
-    // debugger
     console.log('Thêm vào giỏ hàng:', productId, quantity);
     if (this.cart.has(productId)) {
-      // debugger
       this.cart.set(productId, this.cart.get(productId)! + quantity);
     } else {
-      // debugger
       this.cart.set(productId, quantity);
     }
-    // debugger
     this.saveCartToLocalStorage();
     console.log('Giỏ hàng sau khi thêm:', Array.from(this.cart.entries()));
   }

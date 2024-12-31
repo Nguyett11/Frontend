@@ -39,4 +39,30 @@ export class OrderService {
       const url = `${this.apiUrl}/Orders/customer/${id}`;
       return this.http.get<any>(url, this.httpOptions);
   }
+
+    updateDonhang(id: number, body: any): Observable<any> {
+    const url = `${this.apiUrl}/Orders/${id}`;
+    return this.http.put<any>(url, body, this.httpOptions);
+  }
+
+  timkiem(searchText :string): Observable<any>{
+    const url = `${this.apiUrl}/Orders/search/${searchText}`;
+    return this.http.get<any>(url);
+  }
+
+  updateOrderStatus(id: number, newStatus: string): Observable<any> {
+    const url = `${this.apiUrl}/Orders/${id}`;
+    
+    // Tạo một đối tượng JSON chứa orderStatus
+    const body = { orderStatus: newStatus };
+  
+    // Đảm bảo httpOptions có Content-Type là application/json
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+  
+    return this.http.patch<any>(url, body, httpOptions);
+  }
 }

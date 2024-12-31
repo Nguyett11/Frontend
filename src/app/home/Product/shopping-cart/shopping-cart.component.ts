@@ -24,8 +24,13 @@ export class ShoppingCartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    const currentUser = this.userService.getCurrentUser();
+    if (currentUser) {
+      this.user_id = currentUser.user_id;
+    }
      // Lấy danh sách sản phẩm từ giỏ hàng
-    // debugger
+  
     this.cart = this.cartService.getCart();
     const productIds = Array.from(this.cart.keys());
    
@@ -47,7 +52,6 @@ export class ShoppingCartComponent implements OnInit {
             quantity: this.cart.get(productId)!
           };
         });
-        console.log('haha');
       },
       complete: () => {
       
@@ -58,13 +62,9 @@ export class ShoppingCartComponent implements OnInit {
         console.error('Error fetching detail:', error);
       }
     }); 
-    const currentUser = this.userService.getCurrentUser();  
-    if (currentUser) {
-      this.user_id = currentUser.user_id;  
-    } else {
-      console.log('Không có người dùng đăng nhập');
-      
-    }   
+    
+  
+
   }
 
   decreaseQuantity(index: number): void {

@@ -4,7 +4,10 @@
     <h1>Giỏ hàng của bạn</h1>
   </div>
 <div>
-  <button><a [routerLink]="['/home/user/viewOH/',this.user_id ]" [routerLinkActive]="'active-link'">Xem lịch sử mua hàng</a></button>
+  <button [routerLink]="['/home/user/viewOH', user_id]" routerLinkActive="active-link">
+    Xem lịch sử mua hàng
+  </button>
+  
 </div>
 </div>
   <!-- Danh sách sản phẩm -->
