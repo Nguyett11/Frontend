@@ -72,4 +72,28 @@ export class ProductService {
     return this.http.get<Product[]>(url, { params });
   }
   
+
+  postProduct(body: any){
+    const url = `${this.apiUrl}/Products`;
+    return this.http.post(url, body);
+  }
+
+
+
+  deleteProduct(id:number){
+    const url = `${this.apiUrl}/Products/${id}`;
+    return this.http.delete<any>(url, this.httpOptions)
+
+  }
+
+  updateProduct(id: number, body: any): Observable<any> {
+    const url = `${this.apiUrl}/Products/${id}`;
+    return this.http.put<any>(url, body, this.httpOptions);
+  }
+
+  taiAnh(formData: FormData): Observable<string> {
+    const url = `${this.apiUrl}/Products/SaveFile`;
+    return this.http.post<string>(url, formData);  // Sending FormData to the backend
+  }
+
 }

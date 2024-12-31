@@ -74,7 +74,7 @@ export class LoginComponent {
             // Differentiate based on user role (role_id)
             if (roleId === 1) {
               this.message = 'Đăng nhập thành công với quyền Admin';
-              this.router.navigate(['/home/user/register']  ); // Navigate to admin page
+              this.router.navigate(['/admin/index']  ); // Navigate to admin page
             } else if (roleId === 2) {
               this.message = 'Đăng nhập thành công với quyền User';
               this.router.navigate(['/home/list']); // Navigate to user page

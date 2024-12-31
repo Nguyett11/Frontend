@@ -4,5 +4,5 @@ export class Order {
     order_status: string;
     create_at: Date; 
     total_amount: number;
-    // username:string;
+   
 }

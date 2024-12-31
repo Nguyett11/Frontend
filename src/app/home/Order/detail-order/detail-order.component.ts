@@ -37,8 +37,7 @@ export class DetailOrderComponent {
   ) {}
 
   ngOnInit() {
-    const orderId = +this.route.snapshot.paramMap.get('id');
-    //const orderId = Number(this.route.snapshot.paramMap.get('id'));
+    const orderId = Number(this.route.snapshot.paramMap.get('id'));
     if (orderId) {
       this.loadOrderDetails(orderId);
 
@@ -54,12 +53,7 @@ export class DetailOrderComponent {
     this.order_detailService.getOrderDetailById(id).subscribe({
       next: (data) => {
         this.orderDetails= data;
-        // if (data && data.length > 0) {
-        //   this.orderDetails = data[0]; 
-        //    this.orderDetails[id] = data; // Lưu sản phẩm vào đối tượng `products` theo product_id
-        // } else {
-        //   console.error('Không có dữ liệu cho đơn hàng này.');
-        // }
+
         this.loadProducts(this.orderDetails.product_id);
         this.loadOrder(this.orderDetails.order_id);
       },
@@ -96,9 +90,10 @@ export class DetailOrderComponent {
   loadProducts(id: number): void {
     this.productService.getProductDetails(id).subscribe({
       next: (product) => {
-       //this.img = product.image_url;
+        console.log('Product Data:', product);
        this.PathAnh = this.productService.PhotosUrl + "/" + product.image_url;
         this.product_name = product.product_name;
+        console.log('pro', this.product_name);
       },
       error: (err) => {
         console.error(`Lỗi khi lấy sản phẩm với ID ${id}:`, err);

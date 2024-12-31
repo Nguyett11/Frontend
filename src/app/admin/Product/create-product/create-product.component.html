@@ -1,0 +1,44 @@
+
+<div class="create-product-form">
+    <h2>Create Product</h2>
+  
+    <form (ngSubmit)="createProduct()">
+    <!-- Image Preview -->
+    <div *ngIf="image_url && image_url.trim().length > 0">
+        <img [src]="photosUrl + '/' + image_url" alt="Image Preview" width="100" />
+    </div>
+      <!-- Image Upload -->
+      <label for="image">Upload Image</label>
+      <input type="file" id="image" (change)="uploadPhoto($event)" />
+
+      <!-- Product Name -->
+      <label for="product_name">Product Name</label>
+      <input type="text" id="product_name" [(ngModel)]="product_name" name="product_name" required />
+  
+      <!-- Brand Selection -->
+      <label for="brand_id">Brand</label>
+      <select [(ngModel)]="brand_id" name="brand_id" required>
+        <option *ngFor="let brand of list_brand" [value]="brand.brand_id">{{ brand.brand_name }}</option>
+      </select>
+  
+      <!-- Category Selection -->
+      <label for="category_id">Category</label>
+      <select [(ngModel)]="category_id" name="category_id" required>
+        <option *ngFor="let category of list_category" [value]="category.category_id">{{ category.category_name }}</option>
+      </select>
+  
+      <!-- Price -->
+      <label for="price">Price</label>
+      <input type="number" id="price" [(ngModel)]="price" name="price" required />
+  
+      <!-- Quantity -->
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" [(ngModel)]="quantity" name="quantity" required />
+  
+
+      <!-- Submit Button -->
+      <button type="submit">Create Product</button>
+    </form>
+  </div>
+  
+  
